@@ -148,6 +148,7 @@ class Process extends React.Component<IAppProps, IAppState> {
         );
         console.log('uploaded experiment data');
         console.log(experimentId);
+        await experimentServices.beginProcessing(experimentId);
         console.log('complete');
     }
 

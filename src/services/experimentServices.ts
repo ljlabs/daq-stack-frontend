@@ -23,8 +23,16 @@ const uploadExperimentDataFile = async (file: File, id: number): Promise<number>
     return (await axios.post(endpoints.uploadExperimentData + "/" + id.toString(), formData, config)).data.id
 }
 
+const beginProcessing = async (id: number) => {
+    console.log("Processing starting");
+    await axios.get(endpoints.processExperiment + "/" + id.toString());
+    console.log(endpoints.processExperiment + "/" + id.toString());
+    console.log("Processing ending");
+} 
+
 export const experimentServices = {
     uploadExperimentMetadata: async (metadata: IMetadata): Promise<number> => await uploadExperimentMetadata(metadata),
     uploadExperimentConfigFile: async (file: IUploadFile): Promise<number> => await uploadExperimentConfigFile(file),
     uploadExperimentDataFile: async (file: File, id: number): Promise<number> => await uploadExperimentDataFile(file, id),
+    beginProcessing: async (id : number) => await beginProcessing(id),
 }
