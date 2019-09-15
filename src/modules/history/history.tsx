@@ -4,12 +4,14 @@ import moment from 'moment';
 import ExperimentCardSummary from './experimentSummaryCard';
 import Graph from '../../components/graph/graph';
 import { StaticContext, RouteComponentProps, withRouter } from 'react-router';
+import { experimentServices } from '../../services/experimentServices';
+import { IHistory } from '../../types/serverTypes';
 
 interface IAppProps extends React.PropsWithChildren<RouteComponentProps<any, StaticContext, any>> {
 }
 
 interface IAppState {
-    listOfExperiments: Array<IExperimentGeneral>;
+    listOfExperiments: Array<IHistory>;
 }
 
 class History extends React.Component<IAppProps, IAppState> {
@@ -18,31 +20,32 @@ class History extends React.Component<IAppProps, IAppState> {
         this.state = {
             listOfExperiments: [{
                 id: 0,
-                experimentDate: moment(),
-                experimenterName: 'Kyle',
-                platName: 'demo plot',
-                plotData: [23,1,56,123,234,345,45,2,1,21,312,2,34,325,34,23],
-                shortDescription: 'just an experiment',
-                longDescription: 'this is a long description about the co60 coincidence experiment',
-                configFileData: '<xml>...stuff</xml>',
-                configFileUrl: 'http://www.google.com',
-                ldfFileURL: 'http://www.google.com',
-                rootFileURL: 'http://www.google.com'
+                ExperimentDate: moment(),
+                ExperimenterName: 'Kyle',
+                ExperimentName: 'demo plot',
+                Data: [[-2,1,3], [34,1,4]],
+                ExperimentShortDescription: 'just an experiment',
+                // longDescription: 'this is a long description about the co60 coincidence experiment',
+                // configFileData: '<xml>...stuff</xml>',
+                // configFileUrl: 'http://www.google.com',
+                // ldfFileURL: 'http://www.google.com',
+                // rootFileURL: 'http://www.google.com'
             },
             {
                 id: 1,
-                experimentDate: moment(),
-                experimenterName: 'Kyle',
-                platName: 'demo plot',
-                plotData: [2,41,56,123,76,4,42,24,112,254,3,245,34,34,34,2],
-                shortDescription: 'just an experiment',
-                longDescription: 'this is a long description about the co60 coincidence experiment',
-                configFileData: '<xml>...stuff</xml>',
-                configFileUrl: 'http://www.google.com',
-                ldfFileURL: 'http://www.google.com',
-                rootFileURL: 'http://www.google.com'
+                ExperimentDate: moment(),
+                ExperimenterName: 'Kyle',
+                ExperimentName: 'demo plot',
+                Data: [[1,-2,3], [1,34,4]],
+                ExperimentShortDescription: 'just an experiment',
             }],
         };
+    }
+
+    public componentDidMount = async () => {
+        // get history
+        const listOfExperiments = await experimentServices.getHistory();
+        this.setState({ listOfExperiments });
     }
 
     public render = () => {

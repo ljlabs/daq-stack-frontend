@@ -4,9 +4,10 @@ import { withRouter, RouteComponentProps, StaticContext } from 'react-router';
 import { routeConsts } from '../../constants/routes';
 import { Card, CardContent, Typography, CardActions, Button, CardHeader } from '@material-ui/core';
 import Graph from '../../components/graph/graph';
+import { IHistory } from '../../types/serverTypes';
 
 interface IAppProps extends React.PropsWithChildren<RouteComponentProps<any, StaticContext, any>> {
-    generalExperiment: IExperimentGeneral;
+    generalExperiment: IHistory;
 }
 
 interface IAppState {
@@ -24,7 +25,6 @@ class ExperimentCardSummary extends React.Component<IAppProps, IAppState> {
     }
 
     public render = () => {
-        console.log(this.props.generalExperiment.experimentDate.toISOString());
         return (
             <Card className={'fdr'}>
                 {/* generalExperiment={this.props.generalExperiment} */}
@@ -36,15 +36,15 @@ class ExperimentCardSummary extends React.Component<IAppProps, IAppState> {
                     <div className={'aic fdc jcc'}>
                         <CardContent>
                             <Typography color="textSecondary" gutterBottom>
-                                {this.props.generalExperiment.experimenterName}
+                                {this.props.generalExperiment.ExperimenterName}
                             </Typography>
                             <Typography variant="h5" component="h2">
-                                {this.props.generalExperiment.platName}
+                                {this.props.generalExperiment.ExperimentName}
                             </Typography>
                             <Typography color='textSecondary'>
                             </Typography>
                             <Typography variant="body2" component="p">
-                                {this.props.generalExperiment.shortDescription}
+                                {this.props.generalExperiment.ExperimentShortDescription}
                             </Typography>
                         </CardContent>
                         <CardActions className={'jcc wfill'}>

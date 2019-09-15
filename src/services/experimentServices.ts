@@ -1,4 +1,4 @@
-import { IMetadata, IUploadFile } from "../types/serverTypes";
+import { IMetadata, IUploadFile, IHistory } from "../types/serverTypes";
 import axios from "axios";
 import { endpoints } from "../constants/endpoints";
 
@@ -30,9 +30,14 @@ const beginProcessing = async (id: number) => {
     console.log("Processing ending");
 } 
 
+const getHistory = async (): Promise<Array<IHistory>> => {
+    return (await axios.get(endpoints.history)).data as Array<IHistory>;
+}
+
 export const experimentServices = {
     uploadExperimentMetadata: async (metadata: IMetadata): Promise<number> => await uploadExperimentMetadata(metadata),
     uploadExperimentConfigFile: async (file: IUploadFile): Promise<number> => await uploadExperimentConfigFile(file),
     uploadExperimentDataFile: async (file: File, id: number): Promise<number> => await uploadExperimentDataFile(file, id),
     beginProcessing: async (id : number) => await beginProcessing(id),
+    getHistory: async () : Promise<Array<IHistory>> => await getHistory(),
 }

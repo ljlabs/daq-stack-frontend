@@ -5,12 +5,13 @@ import moment from 'moment';
 import { Card, CardContent, Typography, CardActions, Button } from '@material-ui/core';
 import Graph from '../../components/graph/graph';
 import { routeConsts } from '../../constants/routes';
+import { IDetail } from '../../types/serverTypes';
 
 interface IAppProps extends React.PropsWithChildren<RouteComponentProps<any, StaticContext, any>> {
 }
 
 interface IAppState {
-    experiment: IExperimentGeneral;
+    experiment: IDetail;
 }
 
 class Display extends React.Component<IAppProps, IAppState> {
@@ -19,30 +20,25 @@ class Display extends React.Component<IAppProps, IAppState> {
         this.state = {
             experiment: {
                 id: 0,
-                experimentDate: moment(),
-                experimenterName: 'Kyle',
-                platName: 'demo plot',
-                plotData: [23, 1, 56, 123, 234, 345, 45, 2, 1, 21, 312, 2, 34, 325, 34, 23],
-                shortDescription: 'just an experiment',
-                longDescription: 'this is a long description about the co60 coincidence experiment',
-                configFileData: '<xml>...stuff</xml>',
-                configFileUrl: 'http://www.google.com',
-                ldfFileURL: 'http://www.google.com',
-                rootFileURL: 'http://www.google.com'
+                ExperimentDate: moment(),
+                ExperimenterName: 'Kyle',
+                ExperimentName: 'demo plot',
+                Data: [[1,2,3], [1,34,4]],
+                ExperimentLongDescription: 'just an experiment',
             },
         };
     }
 
     public navToRootFile = () => {
-        window.location.href = this.state.experiment.rootFileURL;
+        window.location.href = 'http://www.google.com';
     }
 
     public navToLdfFile = () => {
-        window.location.href = this.state.experiment.ldfFileURL;
+        window.location.href = 'http://www.google.com';
     }
 
     public navToConfigFile = () => {
-        window.location.href = this.state.experiment.configFileUrl;
+        window.location.href = 'http://www.google.com';
     }
 
     public render = () => {
@@ -56,13 +52,13 @@ class Display extends React.Component<IAppProps, IAppState> {
                 <Card>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>
-                            {this.state.experiment.experimenterName + " " + this.state.experiment.experimentDate.toISOString()}
+                            {this.state.experiment.ExperimenterName + " " + this.state.experiment.ExperimentDate.toISOString()}
                         </Typography>
                         <Typography variant="h5" component="h2">
-                            {this.state.experiment.platName}
+                            {this.state.experiment.ExperimentName}
                         </Typography>
                         <Typography variant="body2" component="p">
-                            {this.state.experiment.longDescription}
+                            {this.state.experiment.ExperimentLongDescription}
                         </Typography>
                     </CardContent>
                     <div className={'fdr jcc'}>

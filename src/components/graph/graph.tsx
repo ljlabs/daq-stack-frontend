@@ -1,11 +1,12 @@
 import React from 'react';
 import { IExperimentGeneral } from '../../types/experimentData';
 import PlotlyChart from 'react-plotlyjs-ts';
+import { IHistory, IDetail } from '../../types/serverTypes';
 
 
 
 interface IAppProps {
-    generalExperiment: IExperimentGeneral;
+    generalExperiment: IHistory | IDetail;
 }
 
 interface IAppState {
@@ -18,14 +19,6 @@ class Graph extends React.Component<IAppProps, IAppState> {
         };
     }
 
-    public plotData = () => {
-        const x: Array<number> = [];
-        for(let i : number = 0; i < this.props.generalExperiment.plotData.length; i++) {
-            x.push(i);
-        }
-        return x;
-    }
-
     public render = () => {
         const data = [
         {
@@ -34,12 +27,12 @@ class Graph extends React.Component<IAppProps, IAppState> {
             },
             name: 'bar chart example',
             type: 'scatter',
-            x: this.plotData(),
-            y: this.props.generalExperiment.plotData
+            x: this.props.generalExperiment.Data[0],
+            y: this.props.generalExperiment.Data[1]
         },
     ];
     const layout = {
-        title: this.props.generalExperiment.platName,
+        title: this.props.generalExperiment.ExperimentName,
         xaxis: {
             title: 'time'
         },
