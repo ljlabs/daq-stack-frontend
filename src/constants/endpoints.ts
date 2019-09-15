@@ -5,5 +5,6 @@ export const endpoints = {
     uploadConfig: apiUrl + "/upload/config",
     uploadExperimentData: apiUrl + "/upload/ldf",
     processExperiment: apiUrl + "/processExperiment",
-    history: apiUrl + "/history"
+    history: apiUrl + "/history",
+    detail: apiUrl + "/details"
 }

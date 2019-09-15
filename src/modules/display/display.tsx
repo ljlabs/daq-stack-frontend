@@ -6,6 +6,7 @@ import { Card, CardContent, Typography, CardActions, Button } from '@material-ui
 import Graph from '../../components/graph/graph';
 import { routeConsts } from '../../constants/routes';
 import { IDetail } from '../../types/serverTypes';
+import { experimentServices } from '../../services/experimentServices';
 
 interface IAppProps extends React.PropsWithChildren<RouteComponentProps<any, StaticContext, any>> {
 }
@@ -27,6 +28,12 @@ class Display extends React.Component<IAppProps, IAppState> {
                 ExperimentLongDescription: 'just an experiment',
             },
         };
+    }
+
+    public componentDidMount = async () => {
+        // get history
+        const experiment = await experimentServices.getDetails(this.props.match.params.id);
+        this.setState({ experiment });
     }
 
     public navToRootFile = () => {
@@ -52,7 +59,7 @@ class Display extends React.Component<IAppProps, IAppState> {
                 <Card>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>
-                            {this.state.experiment.ExperimenterName + " " + this.state.experiment.ExperimentDate.toISOString()}
+                            {this.state.experiment.ExperimenterName + " " + this.state.experiment.ExperimentDate.toISOString}
                         </Typography>
                         <Typography variant="h5" component="h2">
                             {this.state.experiment.ExperimentName}
