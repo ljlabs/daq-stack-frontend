@@ -21,6 +21,7 @@ interface IAppState {
     experimentName: string;
     isLoading: boolean;
     experimentFile?: File;
+    experimentXAxis: string;
 }
 
 class Process extends React.Component<IAppProps, IAppState> {
@@ -39,6 +40,7 @@ class Process extends React.Component<IAppProps, IAppState> {
             experimentName: '',
             isLoading: false,
             experimentFile: undefined,
+            experimentXAxis: ''
         };
 
         // this.readerExperimentData.onabort = () => console.log('file reading was aborted');
@@ -68,7 +70,14 @@ class Process extends React.Component<IAppProps, IAppState> {
     }
 
     public experimentPannelIsComplete= () => {
-        return (this.state.experimentDataIsReady && this.state.experimentShortDescription != '' && this.state.experimentLongDescription != '')
+        return (
+            this.state.experimentDataIsReady &&
+            this.state.experimentShortDescription != '' &&
+            this.state.experimentLongDescription != '' &&
+            this.state.experimentXAxis != '' &&
+            this.state.experimenterName != '' &&
+            this.state.experimentName != ''
+            );
     }
 
     public canProcess = () => {
@@ -110,16 +119,22 @@ class Process extends React.Component<IAppProps, IAppState> {
             experimentShortDescription: e.target.value
         });
     }
+
     public updateExperimenterName = (e: any) => {
         this.setState({
             experimenterName: e.target.value
         });
     }
 
-
     public updateExperimentName = (e: any) => {
         this.setState({
             experimentName: e.target.value
+        });
+    }
+
+    public updateExperimentXAxis = (e: any) => {
+        this.setState({
+            experimentXAxis: e.target.value
         });
     }
 
@@ -130,6 +145,7 @@ class Process extends React.Component<IAppProps, IAppState> {
         const experimentId = await experimentServices.uploadExperimentMetadata({
             experimentName: this.state.experimentName,
             experimenterName: this.state.experimenterName,
+            experimentXAxis: this.state.experimentXAxis,
             longDescription: this.state.experimentLongDescription,
             shortDescription: this.state.experimentShortDescription,
         });
@@ -173,6 +189,16 @@ class Process extends React.Component<IAppProps, IAppState> {
                             </Icon>
                         </div>
                         <FileUpload label={"Drag 'n' Drop Your Experiment Data Here"} onDrop={this.onDropExperimentData} hasFile={this.state.experimentDataIsReady}/>
+                        <div className={'pb20 pt10 fdr wfill'}>
+                            <TextField
+                                id="filled-multiline-flexible"
+                                label="User Name"
+                                className={'wfill'}
+                                value={this.state.experimenterName}
+                                onChange={this.updateExperimenterName}
+                                variant="filled"
+                            />
+                        </div>
                         <div className={'pb10 pt20 fdr wfill'}>
                             <TextField
                                 id="filled-multiline-flexible"
@@ -186,10 +212,10 @@ class Process extends React.Component<IAppProps, IAppState> {
                         <div className={'pb20 pt10 fdr wfill'}>
                             <TextField
                                 id="filled-multiline-flexible"
-                                label="User Name"
+                                label="X Axis"
                                 className={'wfill'}
-                                value={this.state.experimenterName}
-                                onChange={this.updateExperimenterName}
+                                value={this.state.experimentXAxis}
+                                onChange={this.updateExperimentXAxis}
                                 variant="filled"
                             />
                         </div>

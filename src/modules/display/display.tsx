@@ -27,6 +27,7 @@ class Display extends React.Component<IAppProps, IAppState> {
                 ExperimentName: 'demo plot',
                 Data: [[1,2,3], [1,34,4]],
                 ExperimentLongDescription: 'just an experiment',
+                experimentXAxis: 'time',
                 ConfigFileUrl: 'http://www.google.com',
                 LdfFileUrl: 'http://www.google.com',
                 RootHistFile: 'http://www.google.com',

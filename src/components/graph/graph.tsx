@@ -37,7 +37,7 @@ class Graph extends React.Component<IAppProps, IAppState> {
     const layout = {
         title: this.props.generalExperiment.ExperimentName,
         xaxis: {
-            title: 'time'
+            title:this.props.generalExperiment.experimentXAxis
         },
         yaxis: {
             title: 'counts'

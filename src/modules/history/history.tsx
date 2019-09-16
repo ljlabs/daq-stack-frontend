@@ -25,6 +25,7 @@ class History extends React.Component<IAppProps, IAppState> {
                 ExperimentName: 'demo plot',
                 Data: [[-2,1,3], [34,1,4]],
                 ExperimentShortDescription: 'just an experiment',
+                experimentXAxis: 'time',
                 // longDescription: 'this is a long description about the co60 coincidence experiment',
                 // configFileData: '<xml>...stuff</xml>',
                 // configFileUrl: 'http://www.google.com',
@@ -38,6 +39,7 @@ class History extends React.Component<IAppProps, IAppState> {
                 ExperimentName: 'demo plot',
                 Data: [[1,-2,3], [1,34,4]],
                 ExperimentShortDescription: 'just an experiment',
+                experimentXAxis: 'time',
             }],
         };
     }
