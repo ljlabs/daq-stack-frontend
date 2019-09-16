@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import Dropzone from 'react-dropzone'
 import FileUpload from '../../components/fileUpload/fileupload';
-import { TextField, Fab, Icon, Avatar } from '@material-ui/core';
+import { TextField, Fab, Icon, Avatar, CircularProgress } from '@material-ui/core';
 import { fabTheme } from '../../theme/fabTheme';
 import { ThemeProvider } from '@material-ui/styles';
 import { experimentServices } from '../../services/experimentServices';
@@ -150,9 +150,16 @@ class Process extends React.Component<IAppProps, IAppState> {
         console.log(experimentId);
         await experimentServices.beginProcessing(experimentId);
         console.log('complete');
+        this.setState({isLoading: false});
     }
 
     public render = () => {
+        if (this.state.isLoading) {
+            return <div className={'jcc aic fdr p20 h80vh'}>
+                <CircularProgress className={""} />
+            </div>
+             
+        }
         return (
             <div className={'fdr p20 hfill'}>
                 <Card className={'wfill ais'}>

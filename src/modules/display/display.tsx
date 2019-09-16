@@ -7,6 +7,7 @@ import Graph from '../../components/graph/graph';
 import { routeConsts } from '../../constants/routes';
 import { IDetail } from '../../types/serverTypes';
 import { experimentServices } from '../../services/experimentServices';
+import { apiUrl } from '../../constants/endpoints';
 
 interface IAppProps extends React.PropsWithChildren<RouteComponentProps<any, StaticContext, any>> {
 }
@@ -26,6 +27,10 @@ class Display extends React.Component<IAppProps, IAppState> {
                 ExperimentName: 'demo plot',
                 Data: [[1,2,3], [1,34,4]],
                 ExperimentLongDescription: 'just an experiment',
+                ConfigFileUrl: 'http://www.google.com',
+                LdfFileUrl: 'http://www.google.com',
+                RootHistFile: 'http://www.google.com',
+                RootTreeFile: 'http://www.google.com',
             },
         };
     }
@@ -36,16 +41,20 @@ class Display extends React.Component<IAppProps, IAppState> {
         this.setState({ experiment });
     }
 
-    public navToRootFile = () => {
-        window.location.href = 'http://www.google.com';
+    public navToRootHistFile = () => {
+        window.location.href = apiUrl + "/" + this.state.experiment.RootHistFile;
+    }
+
+    public navToRootTreeFile = () => {
+        window.location.href = apiUrl + "/" + this.state.experiment.RootTreeFile;
     }
 
     public navToLdfFile = () => {
-        window.location.href = 'http://www.google.com';
+        window.location.href = apiUrl + "/" + this.state.experiment.LdfFileUrl;
     }
 
     public navToConfigFile = () => {
-        window.location.href = 'http://www.google.com';
+        window.location.href = apiUrl + "/" + this.state.experiment.ConfigFileUrl;
     }
 
     public render = () => {
@@ -70,7 +79,10 @@ class Display extends React.Component<IAppProps, IAppState> {
                     </CardContent>
                     <div className={'fdr jcc'}>
                         <CardActions className={'jcc wfill pl20 pr10'}>
-                            <Button size="small" onClick={this.navToRootFile}>Download Root File</Button>
+                            <Button size="small" onClick={this.navToRootHistFile}>Download Root Histogram File</Button>
+                        </CardActions>
+                        <CardActions className={'jcc wfill pl20 pr10'}>
+                            <Button size="small" onClick={this.navToRootTreeFile}>Download Root Tree File</Button>
                         </CardActions>
                         <CardActions className={'jcc wfill pl10 pr10'}>
                             <Button size="small" onClick={this.navToLdfFile}>Download Ldf File</Button>

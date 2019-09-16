@@ -23,8 +23,11 @@ class Graph extends React.Component<IAppProps, IAppState> {
         const data = [
         {
             marker: {
-                color: 'rgb(16, 32, 77)'
+                color: 'rgb(16, 32, 77)',
+                size: 5
             },
+
+            mode: 'markers',
             name: 'bar chart example',
             type: 'scatter',
             x: this.props.generalExperiment.Data[0],
