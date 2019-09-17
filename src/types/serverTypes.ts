@@ -20,7 +20,7 @@ export interface IHistory {
     ExperimentName: string;
     ExperimentShortDescription: string;
     experimentXAxis: string;
-    Data: Array<Array<number>>;
+    Data?: Array<Array<number>>;
     id: number;
 }
 
@@ -30,7 +30,7 @@ export interface IDetail {
     ExperimentName: string;
     ExperimentLongDescription: string;
     experimentXAxis: string;
-    Data: Array<Array<number>>;
+    Data?: Array<Array<number>>;
     id: number;
     ConfigFileUrl: string;
     LdfFileUrl: string;

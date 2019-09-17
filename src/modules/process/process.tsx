@@ -72,11 +72,11 @@ class Process extends React.Component<IAppProps, IAppState> {
     public experimentPannelIsComplete= () => {
         return (
             this.state.experimentDataIsReady &&
-            this.state.experimentShortDescription != '' &&
-            this.state.experimentLongDescription != '' &&
-            this.state.experimentXAxis != '' &&
-            this.state.experimenterName != '' &&
-            this.state.experimentName != ''
+            this.state.experimentShortDescription !== '' &&
+            this.state.experimentLongDescription !== '' &&
+            this.state.experimentXAxis !== '' &&
+            this.state.experimenterName !== '' &&
+            this.state.experimentName !== ''
             );
     }
 

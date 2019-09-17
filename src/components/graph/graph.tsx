@@ -30,8 +30,8 @@ class Graph extends React.Component<IAppProps, IAppState> {
             mode: 'markers',
             name: 'bar chart example',
             type: 'scatter',
-            x: this.props.generalExperiment.Data[0],
-            y: this.props.generalExperiment.Data[1]
+            x: this.props.generalExperiment.Data == null ? [] : this.props.generalExperiment.Data[0],
+            y: this.props.generalExperiment.Data == null ? [] : this.props.generalExperiment.Data[1]
         },
     ];
     const layout = {
